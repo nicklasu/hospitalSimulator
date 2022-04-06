@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1300.0" minHeight="800.0" minWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.controller.Kontrolleri">
+   <children>
+      <HBox prefHeight="615.0" prefWidth="702.0" spacing="20.0" AnchorPane.bottomAnchor="506.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="674.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <GridPane alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="422.0" vgap="10.0">
+            	<columnConstraints>
+            		<ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="75.0" />
+            		<ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="78.0" />
+            	</columnConstraints>
+            	<rowConstraints>
+            		<RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            		<RowConstraints maxHeight="116.0" minHeight="9.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            		<RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+            		<RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            		<RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            	</rowConstraints>
+            	<children>
+            		<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kokonaisaika:" GridPane.rowIndex="2" />
+            		<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Viive:" GridPane.rowIndex="1" />
+            		<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Simulointiaika:" />
+            		<TextField fx:id="aika" promptText="Syötä aika" text="10000" GridPane.columnIndex="1" />
+            		<TextField fx:id="viive" onKeyTyped="#setViive" promptText="Syötä viive" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            		<Label GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            		<Label fx:id="tulosLabel" text="0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <RadioButton fx:id="rbSaapuminen" mnemonicParsing="false" text="Saapumis" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="fifo" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbTarkeys" mnemonicParsing="false" selected="true" text="Tärkeys" toggleGroup="$fifo" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                  <Label fx:id="asiakkaidenSaapumisTiheysLabel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Label text="Asiakkaiden saapumisväli" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <ImageView fx:id="kaynnistaBtn" fitHeight="38.0" fitWidth="45.0" onMouseClicked="#kaynnistaSimulointi" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@../images/play.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="41.0" onMouseClicked="#nopeuta" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@../images/ff.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="45.0" onMouseClicked="#hidasta" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@../images/rewind.png" />
+                     </image>
+                  </ImageView>
+                  <Slider fx:id="laakaritSlider" blockIncrement="1.0" majorTickUnit="10.0" min="1.0" onDragDetected="#setHuoneidenMaaraTexts" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" GridPane.rowIndex="7" />
+                  <Slider fx:id="salitSlider" blockIncrement="1.0" majorTickUnit="10.0" min="1.0" onDragDetected="#setHuoneidenMaaraTexts" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" GridPane.rowIndex="9" />
+                  <Slider fx:id="petipaikatSlider" blockIncrement="1.0" majorTickUnit="10.0" min="1.0" onDragDetected="#setHuoneidenMaaraTexts" showTickLabels="true" showTickMarks="true" value="10.0" GridPane.rowIndex="11" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lääkäreiden määrä" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="TOP" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leikkaussalien määrä" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="TOP" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Petipaikkojen määrä" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="TOP" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lääkärit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sängyt" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Salit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valmiiksi auki olevat" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lääkärin max jonon pituus" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="TOP" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leikkausosaston max jonon pituus" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="TOP" />
+                  <Slider fx:id="laakarinMaxJonoSlider" blockIncrement="1.0" majorTickUnit="10.0" onDragDetected="#setMaxJonoTexts" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" GridPane.rowIndex="13" />
+                  <Slider fx:id="leikkausosastonMaxJonoSlider" blockIncrement="1.0" majorTickUnit="10.0" onDragDetected="#setMaxJonoTexts" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                  <Slider fx:id="aukiOlevatLaakaritAluksiSlider" onDragDetected="#setAluksiTexts" value="25.0" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets right="150.0" />
+                     </GridPane.margin>
+                  </Slider>
+                  <Slider fx:id="aukiolevatPetipaikatAluksiSlider" onDragDetected="#setAluksiTexts" value="25.0" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="150.0" />
+                     </GridPane.margin>
+                  </Slider>
+                  <Slider fx:id="aukiOlevatSalitAluksiSlider" onDragDetected="#setAluksiTexts" value="25.0" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="75.0" right="75.0" />
+                     </GridPane.margin>
+                  </Slider>
+                  <Text fx:id="aukiOlevatLaakaritAluksiText" strokeType="OUTSIDE" strokeWidth="0.0" text="25%" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="TOP" />
+                  <Text fx:id="aukiOlevatSalitAluksiText" strokeType="OUTSIDE" strokeWidth="0.0" text="25%" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="TOP" />
+                  <Text fx:id="aukiolevatPetipaikatAluksiText" strokeType="OUTSIDE" strokeWidth="0.0" text="25%" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="TOP" />
+                  <Slider fx:id="saapumisvaliSlider" majorTickUnit="10.0" min="1.0" onDragDetected="#setSaapumisvaliText" showTickLabels="true" showTickMarks="true" value="30.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="petipaikkojenMaaraText" strokeType="OUTSIDE" strokeWidth="0.0" text="10" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="laakareidenMaaraText" strokeType="OUTSIDE" strokeWidth="0.0" text="10" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="salienMaaraText" strokeType="OUTSIDE" strokeWidth="0.0" text="10" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="laakaritJonoText" strokeType="OUTSIDE" strokeWidth="0.0" text="10" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="leikkausosastotJonoText" strokeType="OUTSIDE" strokeWidth="0.0" text="10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="saapuvatAsiakkaatText" strokeType="OUTSIDE" strokeWidth="0.0" text="30min" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+            	</children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </GridPane>
+            <GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="260.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.1999755859375" minWidth="10.0" prefWidth="158.39998779296874" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.33331298828125" minWidth="10.0" prefWidth="63.20001220703125" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Kuolleet:" />
+                  <Label text="Palvellut asiakkaat:" GridPane.rowIndex="1" />
+                  <Label text="Asiakkaita sairaalassa:" GridPane.rowIndex="2" />
+                  <Label text="Sairaalan käyttöaste:" GridPane.rowIndex="3" />
+                  <Label text="Läpimenoaika:" GridPane.rowIndex="4" />
+                  <Label fx:id="kuolleetLabel" text="0" GridPane.columnIndex="1" />
+                  <Label fx:id="palvellutasiakkaatLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="asiakkaitasairaalassaLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="kayttoasteLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="suoritustehoLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <HBox.margin>
+                  <Insets top="-5.0" />
+               </HBox.margin>
+            </GridPane>
+         </children>
+      </HBox>
+      <ListView fx:id="ajolista" layoutX="805.0" layoutY="21.0" prefHeight="348.0" prefWidth="218.0" />
+      <Canvas fx:id="superCanvas" height="200.0" layoutX="495.0" layoutY="354.0" width="200.0" />
+      <Text fill="RED" layoutX="492.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAAPUMISET" />
+      <Text fill="BLUE" layoutX="622.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POISTUMISET" textAlignment="RIGHT" />
+      <LineChart fx:id="lineChart" layoutX="743.0" layoutY="398.0">
+        <xAxis>
+          <CategoryAxis animated="false" label="Ajokerta" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Kuolemat" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <BarChart fx:id="barChart" animated="false" horizontalGridLinesVisible="false" layoutX="1006.0" layoutY="14.0" maxHeight="416.0" maxWidth="275.0" title="Jono">
+        <xAxis>
+          <CategoryAxis label="Osasto" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis animated="false" autoRanging="false" label="Potilaat" minorTickCount="0" side="LEFT" tickLabelFill="#0d0d0d" tickLabelGap="10.0" />
+        </yAxis>
+      </BarChart>
+      <Label fx:id="laakarijono" alignment="CENTER" layoutX="1098.0" layoutY="243.0" prefHeight="16.0" prefWidth="35.0" text="0" visible="false" />
+      <Label fx:id="leikkausjono" alignment="CENTER" layoutX="1157.0" layoutY="243.0" prefHeight="16.0" prefWidth="35.0" text="0" visible="false" />
+      <Label fx:id="vuodejono" alignment="CENTER" layoutX="1216.0" layoutY="243.0" prefHeight="16.0" prefWidth="35.0" text="0" visible="false" />
+   </children>
+</AnchorPane>
